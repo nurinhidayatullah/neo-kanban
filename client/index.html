@@ -32,10 +32,11 @@
 <body>
 
     <!-- Login Page -->
-    <div class="container-fluid m-0 p-0" style="background: url(assets/bg.jpg); background-size: 100% 100%; width: 100%; min-height: 100vh;" hidden>
+    
+    <div class="container-fluid m-0 p-0" style="background: url(assets/bg.jpg); background-size: 100% 100%; width: 100%; min-height: 100vh;">
         <div class="container-fluid m-0 p-0">
             <div class="p-3 mb-5" style="width: 35%; font-family: Quicksand, sans-serif; min-height: 80vh; float: left; margin-left: 175px; margin-top: 3%;">
-                <div class="card-body shadow-lg" style="background-image: linear-gradient(#84c1ff, #add6ff, #d6eaff, #eaf4ff, #f8fbff); border-radius: 20px; margin-top: 50px; width: 95%;">
+                <div class="card-body" style="background-image: linear-gradient(#84c1ff, #add6ff, #d6eaff, #eaf4ff, #f8fbff); border-radius: 20px; margin-top: 50px; width: 95%; box-shadow: 8px 12px 50px #000000;">
                     <div>
                         <p style="font-size: 32px; text-align: justify; border-bottom: 1px black solid; display: inline;">Login to <b>KANBAN</b></p>
                         <form class="mt-2">
@@ -73,12 +74,17 @@
                                   <label for="exampleInputPassword1">Password</label>
                                   <input type="password" class="form-control" id="exampleInputPassword1">
                                 </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Organization*</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                  </div>
                             </div>
                                 <button type="submit" class="btn btn-secondary">Sign Up</button>
                           </form>
                     </div>
                 </div>
             </div>
+            <img src="./assets/cloud1.png" class="img-fluid" style="position: absolute; margin-top: 4%; margin-left: 23%;">
             <img class="img-fluid" src="./assets/leaf.png" style="position: absolute; width: 5%; top: 10%; left: 640px;">
             <h1 style="position: absolute; font-family: Fredoka One, cursive; letter-spacing: 20px; font-size: 52px; top: 10%; left: 740px; color: whitesmoke;">K<img class="img-fluid" src="./assets/cursor.png" style="width: 50px; height: 40px; margin-bottom: 10px; margin-left: -10px; margin-right: 10px;">NBAN</h1>
             <img class="img-fluid" src="./assets/login.svg" style="width: 45%; top: 25%; left: 525px; position: absolute;">
@@ -97,7 +103,8 @@
             <div class="col-sm mt-4 text-center" style="font-family: Satisfy, cursive; letter-spacing: 4px; font-size: 24px; color: white;">
                 ~ Organize Your Project ~
             </div>
-            <div class="col-lg mt-4 pr-0 text-right">
+            <div class="col-lg d-flex justify-content-end mt-4 pr-0 text-right">
+                <img src="https://i.pravatar.cc/150?u=your@mail.com" style="border-radius: 100%; width: 24px; height: 24px; margin-right: 3%;">
                 <p class="mb-0 mr-4" style="font-family: Sriracha, cursive; color: white;">your@mail.com</p>
             </div>
         </div>
@@ -123,47 +130,42 @@
             </div>
             <div class="container-fluid p-0 overflow-auto mt-2 shadow rounded" style="width: 100%; background-color: #d6eaff; margin-left: -15px; max-height: 60vh;">
                 <div class="card card-body m-2 p-0" style="font-size: 14px; min-height: 76px;">
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid red; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid blue; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid green; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid yellow; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid blue; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid red; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid green; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
-                        <p class="m-0">Add Column</p>
-                        <small class="text-muted m-0">By: abcd@mail.com</small><br>
-                        <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
-                    </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid green; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
@@ -172,7 +174,7 @@
             </div>
             <div class="container-fluid p-0 shadow rounded" style="width: 100%; background-color: #add6ff; margin-left: -15px;">
                 <div class="card-body mt-2 p-2 d-flex justify-content-end">
-                    <a href=""><img src="./assets/plus.png" style="width: 24px; height: 24px;"></a>
+                    <a href="" data-toggle="modal" data-target="#staticBackdrop" role="button"><img src="./assets/plus.png" style="width: 24px; height: 24px;"></a>
                 </div>
             </div>
         </div>
@@ -184,27 +186,32 @@
             </div>
             <div class="container-fluid mt-2 p-0 overflow-auto shadow rounded" style="width: 100%; background-color: #d6eaff; margin-left: -15px; max-height: 60vh;">
                 <div class="card card-body m-2 p-0" style="font-size: 14px; min-height: 76px;">
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid red; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid blue; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid green; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid yellow; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid blue; border-radius: 5px;">
+                        <p class="m-0">Add Column</p>
+                        <small class="text-muted m-0">By: abcd@mail.com</small><br>
+                        <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
+                    </div>
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid red; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
@@ -213,7 +220,7 @@
             </div>
             <div class="container-fluid p-0 shadow rounded" style="width: 100%; background-color: #add6ff; margin-left: -15px;">
                 <div class="card-body mt-2 p-2 d-flex justify-content-end">
-                    <a href=""><img src="./assets/plus.png" style="width: 24px; height: 24px;"></a>
+                    <a href="" data-toggle="modal" data-target="#staticBackdrop1" role="button"><img src="./assets/plus.png" style="width: 24px; height: 24px;"></a>
                 </div>
             </div>
         </div>
@@ -225,27 +232,42 @@
             </div>
             <div class="container-fluid p-0 mt-2 overflow-auto shadow rounded" style="width: 100%; background-color: #d6eaff; margin-left: -15px; max-height: 60vh;">
                 <div class="card card-body m-2 p-0" style="font-size: 14px; min-height: 76px;">
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid red; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid blue; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid green; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid yellow; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid blue; border-radius: 5px;">
+                        <p class="m-0">Add Column</p>
+                        <small class="text-muted m-0">By: abcd@mail.com</small><br>
+                        <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
+                    </div>
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid red; border-radius: 5px;">
+                        <p class="m-0">Add Column</p>
+                        <small class="text-muted m-0">By: abcd@mail.com</small><br>
+                        <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
+                    </div>
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid yellow; border-radius: 5px;">
+                        <p class="m-0">Add Column</p>
+                        <small class="text-muted m-0">By: abcd@mail.com</small><br>
+                        <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
+                    </div>
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid green; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
@@ -254,7 +276,7 @@
             </div>
             <div class="container-fluid p-0 shadow rounded" style="width: 100%; background-color: #add6ff; margin-left: -15px;">
                 <div class="card-body mt-2 p-2 d-flex justify-content-end">
-                    <a href=""><img src="./assets/plus.png" style="width: 24px; height: 24px;"></a>
+                    <a href="" data-toggle="modal" data-target="#staticBackdrop2" role="button"><img src="./assets/plus.png" style="width: 24px; height: 24px;"></a>
                 </div>
             </div>
         </div>
@@ -266,27 +288,42 @@
             </div>
             <div class="container-fluid p-0 mt-2 overflow-auto shadow rounded" style="width: 100%; background-color: #d6eaff; margin-left: -15px; max-height: 60vh;">
                 <div class="card card-body m-2 p-0" style="font-size: 14px; min-height: 76px;">
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid red; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid blue; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid green; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid yellow; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
                     </div>
-                    <div class="m-2">
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid blue; border-radius: 5px;">
+                        <p class="m-0">Add Column</p>
+                        <small class="text-muted m-0">By: abcd@mail.com</small><br>
+                        <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
+                    </div>
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid red; border-radius: 5px;">
+                        <p class="m-0">Add Column</p>
+                        <small class="text-muted m-0">By: abcd@mail.com</small><br>
+                        <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
+                    </div>
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid green; border-radius: 5px;">
+                        <p class="m-0">Add Column</p>
+                        <small class="text-muted m-0">By: abcd@mail.com</small><br>
+                        <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
+                    </div>
+                    <div class="p-0 pl-3 m-2" style="border-left: 7px solid green; border-radius: 5px;">
                         <p class="m-0">Add Column</p>
                         <small class="text-muted m-0">By: abcd@mail.com</small><br>
                         <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
@@ -295,11 +332,138 @@
             </div>
             <div class="container-fluid p-0 shadow rounded" style="width: 100%; background-color: #add6ff; margin-left: -15px;">
                 <div class="card-body mt-2 p-2 d-flex justify-content-end">
-                    <a href=""><img src="./assets/plus.png" style="width: 24px; height: 24px;"></a>
+                    <a href="" data-toggle="modal" data-target="#staticBackdrop3" role="button"><img src="./assets/plus.png" style="width: 24px; height: 24px;"></a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Add Task Backlog Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="font-family: Quicksand, sans-serif;">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Add Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Task</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Category</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <!-- <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> -->
+                    <button type="button" class="btn btn-primary">Add Task</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Add task todo modal -->
+    <div class="modal fade" id="staticBackdrop1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="font-family: Quicksand, sans-serif;">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Add Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Task</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Category</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <!-- <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> -->
+                    <button type="button" class="btn btn-primary">Add Task</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Add task Doing Modal -->
+    <div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="font-family: Quicksand, sans-serif;">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Add Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Task</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Category</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <!-- <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> -->
+                    <button type="button" class="btn btn-primary">Add Task</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Add task Done Modal -->
+    <div class="modal fade" id="staticBackdrop3" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="font-family: Quicksand, sans-serif;">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Add Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Task</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Category</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <!-- <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> -->
+                    <button type="button" class="btn btn-primary">Add Task</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </form>
+            </div>
+          </div>
+        </div>
+    </div>
 </body>
 </html>
