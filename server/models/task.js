@@ -36,9 +36,10 @@ module.exports = (sequelize, DataTypes) => {
     hooks: {
       beforeCreate: (task, opt) => {
         if(task.title === '') task.title = 'Unnamed'
-        if(task.category === '') task.category = 'backlog'
-        if(task.priority === '') task.priority = 'not important'
-        if(task.due_date === null) {
+        if(task.priority === '') task.priority = 'lowest'
+      },
+      beforeValidate: (task, opt) => {
+        if(task.due_date === '') {
           let today = new Date()
           let tomorrow = new Date(today)
           tomorrow = tomorrow.setDate(tomorrow.getDate()+1)

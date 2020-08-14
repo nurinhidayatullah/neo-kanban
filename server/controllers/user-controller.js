@@ -45,7 +45,7 @@ class UserControl {
             }
 
             let token = generateToken(payload)
-            res.status(200).json({token})
+            res.status(200).json({token, email: user.email})
         })
         .catch(err => {
             console.log(err)

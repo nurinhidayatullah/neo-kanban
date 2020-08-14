@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500&family=Satisfy&family=Sriracha&display=swap" rel="stylesheet">
+    <title>Kanban</title>
+</head>
+<body>
+    <div id="app">
+        <!-- Login Page -->
+        <div v-if="pageName == 'login'" >
+            <div class="login-container container-fluid m-0 p-0">
+                <img src="./assets/cloud2.png" class="img-login-cloud-1 img-fluid">
+                <div class="login-form-container container-fluid m-0 p-0">
+                    <div class="login-form p-3 mb-5 container-fluid">
+                        <div class="card-body login-body">
+                            <div v-if="secondaryPageName == 'signIn'">
+                                <p class="login-title">Login to <b>KANBAN</b></p>
+                                <form class="mt-2" @submit.prevent="login">
+                                    <div class="w-75">
+                                        <div class="form-group">
+                                          <label for="exampleInputEmail1">Email address</label>
+                                          <input type="email" v-model="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="exampleInputPassword1">Password</label>
+                                          <input type="password" v-model="password" class="form-control" id="exampleInputPassword1">
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid w-75 m-0 p-0">
+                                        <div class="button-login-form">
+                                            <button type="submit" class="btn btn-secondary">Login</button>
+                                            <h4 class="mt-1">or</h4>
+                                            <button type="submit" class="btn btn-secondary">Sign in Google</button>
+                                        </div><br>
+                                        <small>Don't have an account? <a href="" @click.prevent="toSignUp">Sign Up Now!</a></small>
+                                    </div>
+                                  </form>
+                            </div>
+                            <div v-if="secondaryPageName == 'signUp'">
+                                <p style="font-size: 32px; text-align: justify; border-bottom: 1px black solid; display: inline;">Start for Free</p>
+                                <form class="mt-2" @submit.prevent="signUp">
+                                    <div class="w-75">
+                                        <div class="form-group">
+                                          <label for="exampleInputEmail1">Email address</label>
+                                          <input type="email" v-model="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="exampleInputPassword1">Password</label>
+                                          <input type="password" v-model="password" class="form-control" id="exampleInputPassword1">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Organization*</label>
+                                            <input type="text" v-model="organization" class="form-control" id="exampleInputPassword1">
+                                          </div>
+                                    </div>
+                                        <button type="submit" class="btn btn-secondary">Sign Up</button>
+                                        <button @click.prevent="cancelSignUp" class="btn btn-secondary">Cancel</button>
+                                  </form>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="./assets/cloud1.png" class="img-login-cloud-2 img-fluid">
+                    <img class="img-logo img-fluid" src="./assets/leaf.png">
+                    <h1 class="main-logo">K<img class="img-on-logo img-fluid" src="./assets/cursor.png">NBAN</h1>
+                    <img class="img-login-main img-fluid" src="./assets/login.svg">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main-Page -->
+        <div v-else-if="pageName == 'main'">
+            <!-- navbar -->
+            <div class="navbar navbar-expand-lg p-0 ml-2 mr-2 position-fixed mt-3">
+                <div class="list-style-none container-fluid row d-flex mb-0 mr-0 pr-0 justify-content-lg-between position-fixed">
+                    <div class="col-lg mt-4 navbar-colapse">
+                        <div class="d-flex">
+                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <img class="img-fluid mt-4 mr-4 mb-1" src="./assets/menu.png">
+                            </a>
+                            <p class="mt-3">
+                                K<img class="img-fluid mr-2 mb-1 nav-text-logo" src="./assets/cursor.png">NBAN
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm mt-4 text-center intro-text">
+                        ~ Organize Your Project ~
+                    </div>
+                    <div class="col-lg d-flex justify-content-end mt-4 pr-0 text-right">
+                        <img class="nav-profile" src="https://i.pravatar.cc/150?u=your@mail.com">
+                        <p class="mb-0 mr-4 nav-email">your@mail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kanban Page -->
+                    
+            <div class="container-fluid ml-2 mr-2 width-scroll vh-100">
+                <!-- Logout Menu Bar -->
+                <div class="collapse col-lg mr-2 logout-colapse" id="collapseExample">
+                    <div class="card card-body shadow rounded logout-body">
+                        <img class="full-profile" src="https://i.pravatar.cc/150?u=your@mail.com"><br>
+                        <p class="text-center text-light">your@mail.com</p>
+                        <button class="btn btn-success" @click.prevent="logout">Logout</button>
+                        <img class="img-fluid mt-4 ml-4" src="./assets/logout.svg" width="70%">
+                    </div>
+                </div>
+                <!-- Backlog list -->
+                <div class=" mr-4 ml-4 task-container">
+                    <div class="container-fluid row rounded task-title-bar">
+                        <img class="mt-2 mr-2 task-icon" src="./assets/backlog.png">
+                        <p class="mt-2">Backlog</p>
+                    </div>
+                    <div class="container-fluid p-0 overflow-auto mt-2 shadow rounded task-card-container">
+                        <div class="card-body m-1 p-0 task-card">
+                            <div class=" p-0 pl-3 m-1 task-body">
+                                <div class="d-flex justify-content-between">
+                                    <p class="m-0">Add Column</p>
+                                    <div>
+                                        <a href=""><img class="action-button" src="./assets/edit.png"></a>
+                                        <a href=""><img class="action-button" src="./assets/delete.png"></a>
+                                    </div>
+                                </div>
+                                <p></p>
+                                <small class="text-muted m-0">By: abcd@mail.com</small><br>
+                                <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid p-0 shadow rounded add-btn-container">
+                        <div class="card-body mt-2 p-2 d-flex justify-content-end">
+                            <a href=""  data-toggle="modal" data-target="#staticBackdrop" role="button">
+                                <img class="add-modal-img" src="./assets/plus.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- To-Do list -->
+                <div class="mr-4 ml-4n task-container">
+                    <div class="container-fluid row rounded task-title-bar">
+                        <img class="mt-2 mr-2 task-icon" src="./assets/to-do.png">
+                        <p class="mt-2">To-Do</p>
+                    </div>
+                    <div class="container-fluid p-0 overflow-auto mt-2 shadow rounded task-card-container">
+                        <div class="card-body m-1 p-0 task-card">
+                            <div class=" p-0 pl-3 m-1 task-body">
+                                <div class="d-flex justify-content-between">
+                                    <p class="m-0">Add Column</p>
+                                    <div>
+                                        <a href=""><img class="action-button" src="./assets/edit.png"></a>
+                                        <a href=""><img class="action-button" src="./assets/delete.png"></a>
+                                    </div>
+                                </div>
+                                <p></p>
+                                <small class="text-muted m-0">By: abcd@mail.com</small><br>
+                                <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid p-0 shadow rounded add-btn-container">
+                        <div class="card-body mt-2 p-2 d-flex justify-content-end">
+                            <a href="" data-toggle="modal" data-target="#staticBackdrop" role="button">
+                                <img class="add-modal-img" src="./assets/plus.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Doing list -->
+                <div class="mr-4 ml-4n task-container">
+                    <div class="container-fluid row rounded task-title-bar">
+                        <img class="mt-2 mr-2 task-icon" src="./assets/process.png">
+                        <p class="mt-2">Doing</p>
+                    </div>
+                    <div class="container-fluid p-0 overflow-auto mt-2 shadow rounded task-card-container">
+                        <div class="card-body m-1 p-0 task-card">
+                            <div class=" p-0 pl-3 m-1 task-body">
+                                <div class="d-flex justify-content-between">
+                                    <p class="m-0">Add Column</p>
+                                    <div>
+                                        <a href=""><img class="action-button" src="./assets/edit.png"></a>
+                                        <a href=""><img class="action-button" src="./assets/delete.png"></a>
+                                    </div>
+                                </div>
+                                <p></p>
+                                <small class="text-muted m-0">By: abcd@mail.com</small><br>
+                                <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid p-0 shadow rounded add-btn-container">
+                        <div class="card-body mt-2 p-2 d-flex justify-content-end">
+                            <a href="" data-toggle="modal" data-target="#staticBackdrop" role="button">
+                                <img class="add-modal-img" src="./assets/plus.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Done List -->
+                <div class="mr-4 ml-4n task-container">
+                    <div class="container-fluid row rounded task-title-bar">
+                        <img class="mt-2 mr-2 task-icon" src="./assets/done.png">
+                        <p class="mt-2">Done</p>
+                    </div>
+                    <div class="container-fluid p-0 overflow-auto mt-2 shadow rounded task-card-container">
+                        <div class="card-body m-1 p-0 task-card">
+                            <div class=" p-0 pl-3 m-1 task-body">
+                                <div class="d-flex justify-content-between">
+                                    <p class="m-0">Add Column</p>
+                                    <div>
+                                        <a href=""><img class="action-button" src="./assets/edit.png"></a>
+                                        <a href=""><img class="action-button" src="./assets/delete.png"></a>
+                                    </div>
+                                </div>
+                                <p></p>
+                                <small class="text-muted m-0">By: abcd@mail.com</small><br>
+                                <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid p-0 shadow rounded add-btn-container">
+                        <div class="card-body mt-2 p-2 d-flex justify-content-end">
+                            <a href="" data-toggle="modal" data-target="#staticBackdrop" role="button">
+                                <img class="add-modal-img" src="./assets/plus.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mr-4 ml-4n task-container">
+                    <div class="container-fluid row rounded task-title-bar">
+                        <img class="mt-2 mr-2 task-icon" src="./assets/done.png">
+                        <p class="mt-2">Done</p>
+                    </div>
+                    <div class="container-fluid p-0 overflow-auto mt-2 shadow rounded task-card-container">
+                        <div class="card-body m-1 p-0 task-card">
+                            <div class=" p-0 pl-3 m-1 task-body">
+                                <div class="d-flex justify-content-between">
+                                    <p class="m-0">Add Column</p>
+                                    <div>
+                                        <a href=""><img class="action-button" src="./assets/edit.png"></a>
+                                        <a href=""><img class="action-button" src="./assets/delete.png"></a>
+                                    </div>
+                                </div>
+                                <p></p>
+                                <small class="text-muted m-0">By: abcd@mail.com</small><br>
+                                <small class="text-muted m-0">21 Agustus 2020, 10:30</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid p-0 shadow rounded add-btn-container">
+                        <div class="card-body mt-2 p-2 d-flex justify-content-end">
+                            <a href="" data-toggle="modal" data-target="#staticBackdrop" role="button">
+                                <img class="add-modal-img" src="./assets/plus.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!-- Add Task Backlog Modal -->
+        <div class="modal fade add-task-modal" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Add Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Task</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Category</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <!-- <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> -->
+                    <button type="button" class="btn btn-primary">Add Task</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </form>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <!-- Add task todo modal -->
+        <div class="modal fade" add-task-modal id="staticBackdrop1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Add Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Task</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Category</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <!-- <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> -->
+                    <button type="button" class="btn btn-primary">Add Task</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </form>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <!-- Add task Doing Modal -->
+        <div class="modal fade" add-task-modal id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Add Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Task</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Category</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <!-- <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> -->
+                    <button type="button" class="btn btn-primary">Add Task</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </form>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <!-- Add task Done Modal -->
+        <div class="modal fade" add-task-modal id="staticBackdrop3" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Add Task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Task</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Category</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <!-- <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> -->
+                    <button type="button" class="btn btn-primary">Add Task</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </form>
+            </div>
+          </div>
+        </div>
+        </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="./main.js"></script>
+</body>
+</html>

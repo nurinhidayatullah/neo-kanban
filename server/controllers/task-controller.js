@@ -1,4 +1,4 @@
-const { Task, User } = require('../models')
+const { Task, User, Category } = require('../models')
 
 class TaskControl {
     static create (req, res, next) {
@@ -24,6 +24,7 @@ class TaskControl {
         })
         .catch(err => {
             console.log(err)
+            res.status(500).json({err: err.errors})
             next(err)
         })
     }
@@ -39,6 +40,7 @@ class TaskControl {
                     UserId: task.UserId,
                     title: task.title,
                     description: task.description,
+                    category: task.category,
                     priority: task.priority,
                     due_date: task.due_date
                 })
@@ -78,6 +80,32 @@ class TaskControl {
         Task.destroy({where: {id}})
         .then(data => {
             res.status(200).json({msg: 'Delete Success!!!'})
+        })
+        .catch(err => {
+            next(err)
+        })
+    }
+
+    static getCategory (req, res, next) {
+        let tasks = []
+        Category.findAll({
+            where: {
+                organization: process.env.ORG_ALL
+            }
+        })
+        .then(data => {
+            tasks = data
+            return Category.findAll({
+                where: {
+                    organization: req.userData.organization
+                }
+            })
+        })
+        .then(datas => {
+            datas.forEach(data => {
+                task.push(data)
+            })
+            res.status(200).json({categories: tasks})
         })
         .catch(err => {
             next(err)

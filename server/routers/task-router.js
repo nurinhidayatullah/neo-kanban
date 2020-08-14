@@ -9,5 +9,6 @@ router.post('/', TaskControl.create)
 router.get('/', TaskControl.show)
 router.put('/:id', authorization, TaskControl.update)
 router.delete('/:id', authorization, TaskControl.delete)
+router.get('/categories', TaskControl.getCategory)
 
 module.exports = router

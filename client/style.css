@@ -26,7 +26,7 @@ footer {
 }
 
 .login-container {
-    background: url(assets/bg.jpg); 
+    background: url(./src/images/bg.jpg); 
     background-size: 100% 100%; 
     width: 100%; 
     min-height: 100vh; 
@@ -171,6 +171,7 @@ footer {
 }
 
 .logout-body {
+    width: 200px;
     background-color: #3b7dd8;
 }
 
@@ -178,10 +179,16 @@ footer {
     border-radius: 100%;
 }
 
+.width-scroll {
+    display: flex;
+    justify-content: start;
+    min-width: 100vw;
+    height: 100vh; 
+}
 .task-container {
     font-family: Quicksand, sans-serif; 
-    margin-top: 100px; 
-    width: 100%; 
+    margin-top: 100px;
+    width: 250px;
     height: 32px;
 }
 
@@ -208,7 +215,6 @@ footer {
 }
 
 .task-body {
-    border-left: 7px solid red; 
     border-radius: 5px;
     background-color: white;
 }
@@ -233,4 +239,51 @@ footer {
     height: 16px;
     margin-right: 10px;
     margin-top: 5px;
+}
+
+.no-task {
+    display: flex;
+    justify-content: center;
+    margin-left: 5px;
+}
+
+.no-task-img {
+    width: 64px; 
+    height: 64px;
+    opacity: 40%;
+}
+
+.no-task-text {
+    text-align: center;
+    opacity: 40%;
+}
+
+.collapse-description {
+    padding: 5px;
+    padding-left: 20px;
+    text-align: justify;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.flex-custom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.date-sizing {
+    width: 45%;
+}
+
+.add-form-styling {
+    border-radius: 20px; 
+    background-color: #a2c4e7
+}
+
+.btn-add-edit {
+    display: flex;
+    justify-content: flex-end;
 }
