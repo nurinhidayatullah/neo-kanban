@@ -41,6 +41,7 @@
             @deleteEvent="deleteTask"
             @addEvent="addTask"
             @editEvent="editTask"
+            @dragEvent="drag"
         ></Category>
         </div>      
     </div>
@@ -67,6 +68,9 @@ export default {
         },
         editTask(obj) {
             this.$emit('editEvent', obj)
+        },
+        drag(obj) {
+            this.$emit('dragEvent', obj)
         }
     }
 }

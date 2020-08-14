@@ -16,19 +16,21 @@
                             <small>Click add button for input</small>
                         </div>
                     </div>
-                    <div class="accordion" :id="`accordionCollapse-${categoryData.id}`">
-                        <div :id="`heading-${categoryData.id}`">
-                            <Task 
-                                v-for="task in filterTask" :key="task.id"
-                                :taskProperty="task"
-                                :categoryProperty="categoryData"
-                                :userEmail="userEmail"
-                                @deleteEvent="deleteTask"
-                                @editEvent="editTask"
-                                >
-                            </Task>
+                        <div class="accordion" :id="`accordionCollapse-${categoryData.id}`">
+                            <div :id="`heading-${categoryData.id}`">
+                                <draggable :list="filterTask" group="task" :move="onMove" :category="categoryData" @end="updateCategory">
+                                <Task 
+                                    v-for="task in filterTask" :key="task.id" :id="task.id"
+                                    :taskProperty="task"
+                                    :categoryProperty="categoryData"
+                                    :userEmail="userEmail"
+                                    @deleteEvent="deleteTask"
+                                    @editEvent="editTask"
+                                    >
+                                </Task>
+                                </draggable>    
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
             <div class="container-fluid p-0 shadow rounded add-btn-container">
@@ -89,6 +91,8 @@
 
 <script>
 import Task from './Task'
+import draggable from 'vuedraggable'
+import axios from '../config/axios'
 export default {
     name: "Category",
     props: ['categoryData', 'tasksDatas', 'userEmail'],
@@ -98,10 +102,12 @@ export default {
             priority: '',
             description: '',
             due_date: '',
+            currentId: null,
+            currentCategory: null
         }
     },
     components: {
-        Task
+        Task, draggable
     },
     computed: {
         filterTask() {
@@ -114,6 +120,19 @@ export default {
         }
     },
     methods: {
+        updateCategory() {
+            let obj= {
+                id: this.currentId,
+                category: this.currentCategory
+            }
+            this.$emit('dragEvent', obj)
+        },
+        onMove(evt) {
+            console.log(evt.draggedContext.element.id)
+            console.log(evt.relatedContext.component.$attrs.category.name)
+            this.currentId = evt.draggedContext.element.id
+            this.currentCategory = evt.relatedContext.component.$attrs.category.name
+        },
         deleteTask(id) {
             this.$emit('deleteEvent', id)
         },

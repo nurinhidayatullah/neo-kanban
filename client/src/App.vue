@@ -18,6 +18,7 @@
             @deleteEvent="deleteTask"
             @addEvent="addTask"
             @editEvent="editTask"
+            @dragEvent="drag"
         ></HomePage>
     </div>
 </template>
@@ -118,11 +119,27 @@ export default {
                 this.isError = true
             })
         },
-        
         getEmail() {
             this.emailUser = localStorage.email
         },
-
+        drag(obj) {
+            axios({
+                url: `/tasks/category/${obj.id}`,
+                method: 'put',
+                headers: {
+                    token: localStorage.token
+                },
+                data: {
+                    category: obj.category
+                }
+            })
+            .then(res => {
+                this.fetchTask()
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        },
         logout() {
             localStorage.clear()
             this.checkAuth()

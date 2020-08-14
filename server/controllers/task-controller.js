@@ -46,13 +46,12 @@ class TaskControl {
                     User: task.User.dataValues
                 })
             });
-            console.log(arr)
             res.status(200).json({tasks: arr})
         })
         .catch(err => {
             res.status(500).json({err: err.errors})
             console.log(err)
-            // next(err)
+            next(err)
         })
     }
 
@@ -105,6 +104,20 @@ class TaskControl {
         .catch(err => {
             next(err)
         })
+    }
+
+    static updateCategory(req,res,next) {
+        let id = req.params.id
+        let {category} = req.body
+        Task.update({category}, {where: {id}, field: [category]})
+            .then(data => {
+                res.status(200).json({msg: "success update category"})
+            })
+            .catch(err => {
+                console.log(err)
+                // res.status(500).json({msg : err})
+                next(err)
+            }) 
     }
 }
 

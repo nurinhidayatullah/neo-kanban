@@ -43,7 +43,6 @@ class UserControl {
                 email: user.email,
                 organization: user.organization
             }
-            console.log(payload)
             let token = generateToken(payload)
             res.status(200).json({token, email: user.email})
         })
