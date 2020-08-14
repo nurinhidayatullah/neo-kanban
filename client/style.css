@@ -64,8 +64,7 @@ footer {
 }
 
 .button-login-form {
-    display: flex; 
-    justify-content: space-evenly;
+    position: absolute 
 }
 
 .img-login-cloud-1{
@@ -181,9 +180,7 @@ footer {
 
 .width-scroll {
     display: flex;
-    justify-content: start;
-    min-width: 100vw;
-    height: 100vh; 
+    justify-content: space-between;
 }
 .task-container {
     font-family: Quicksand, sans-serif; 

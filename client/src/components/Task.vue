@@ -6,11 +6,12 @@
                     <p class="m-0">{{ taskProperty.title }}</p>
                     <div>
                         <a href="" data-toggle="modal" :data-target="`#staticBackdrop-add-${taskProperty.id}`"><img class="action-button" src="../images/edit.png"></a>
-                        <a href="" @click.prevent="deleteTask"><img class="action-button" src="../images/delete.png"></a>
+                        <a href="" v-if="FailAuth == false" @click.prevent="deleteTask"><img class="action-button" src="../images/delete.png"></a>
+                        <a href="" v-if="FailAuth == true" @click.prevent="deleteTask"><img class="action-button" data-toggle="tooltip" data-placement="rigth" data-animation="data-delay: {show: 1}" title="You not allow to Delete This Task" src="../images/delete.png"></a>
                     </div>
                 </div>
                 <p></p>
-                <small class="text-muted m-0">By: {{ userEmail }}</small><br>
+                <small class="text-muted m-0">By: {{ taskProperty.User.email }}</small><br>
                 <small class="text-muted m-0">{{fetchDay}} {{fetchMonth}} {{fetchYear}}, {{fetchTime}}</small>
             </div>
         </a>
@@ -42,7 +43,8 @@ export default {
                 isAlarming : false,
                 isLow : false,
                 isLowest : false
-            }
+            },
+            FailAuth: false
         }
     },
     computed: {
@@ -114,11 +116,8 @@ export default {
     },
     methods: {
         deleteTask() {
+            if(this.taskProperty.User.email != this.userEmail) this.FailAuth = true
             this.$emit('deleteEvent', this.taskProperty.id)
-        },
-        checkPriority() {
-            
-            
         },
         editTask(obj) {
             this.$emit('editEvent', obj)

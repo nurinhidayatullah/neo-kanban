@@ -9,6 +9,7 @@ const authorization = (req, res, next) => {
             else throw {msg: 'you\'re not authorize to do this'}
         })
         .catch(err => {
+            console.log(err)
             next(err)
         })
 }

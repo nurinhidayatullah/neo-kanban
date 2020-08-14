@@ -17,16 +17,15 @@
                                   <label for="exampleInputPassword1">Password</label>
                                   <input type="password" v-model="password" class="form-control" id="exampleInputPassword1">
                                 </div>
-                            </div>
+                            </div><br><br><br>
+                            <small v-if="isError == true"><b><i>{{ errStr }}<i><b></small>
                             <div class="container-fluid w-75 m-0 p-0">
-                                <div class="button-login-form">
-                                    <button type="submit" class="btn btn-secondary">Login</button>
-                                    <h4 class="mt-1">or</h4>
-                                    <button type="submit" class="btn btn-secondary">Sign in Google</button>
-                                </div><br>
-                                <small>Don't have an account? <a href="" @click.prevent="toSignUpPage">Sign Up Now!</a></small>
+                                    <button type="submit" style="top: 400px;" class="btn btn-secondary position-absolute">Login</button>
+                                    <h4 class="mt-1" style="position: absolute; left: 22%; top: 400px">or</h4>
                             </div>
-                          </form>
+                        </form>
+                            <button v-google-signin-button="clientId" style="position: absolute; top: 400px; left: 25%" class="google-signin-button btn btn-secondary"> Continue with Google</button>
+                            <small>Don't have an account? <a href="" @click.prevent="toSignUpPage">Sign Up Now!</a></small>
                     </div>
                     <div v-else-if="formName == 'signUp'">
                         <p style="font-size: 32px; text-align: justify; border-bottom: 1px black solid; display: inline;">Start for Free</p>
@@ -47,7 +46,9 @@
                                   </div>
                             </div>
                                 <button type="submit" class="btn btn-secondary">Sign Up</button>
-                                <button class="btn btn-secondary" @click.prevent="cancelSignUp">Cancel</button>
+                                <button class="btn btn-secondary" @click.prevent="cancelSignUp">Cancel</button><br>
+                                <small v-if="isError == true"><b><i>{{ errStr }}<i><b></small>
+                                <br>
                         </form>
                     </div>
                 </div>
@@ -61,19 +62,31 @@
 </template>
 
 <script>
+import axios from '../config/axios'
 export default {
     name: "LoginPage",
+    props: ['errorMsg', 'isError', 'formName'],
     data() {
         return {
-            formName: 'login',
+            clientId: '559460521278-l7nojve7knmj89b0luao668hu455jsqn.apps.googleusercontent.com',
             email: '',
             password: '',
             emailSignUp: '',
             passwordSignUp: '',
-            organization: ''
+            organization: '',
+        }
+    }, computed :{
+        errStr() {
+            return this.errorMsg.join('')
         }
     },
     methods: {
+        OnGoogleAuthSuccess (idToken) {
+            this.$emit('gAuth', idToken)
+        },
+        OnGoogleAuthFail (error) {
+            console.log(error)
+        },
         login() {
             this.$emit('loginEvent', {
                 email: this.email,
@@ -81,9 +94,16 @@ export default {
             })
         },
         toSignUpPage() {
+            this.isError = false,
+            this.errorMsg = ''
             this.formName = 'signUp'
+            this.passwordSignUp = ''
+            this.emailSignUp = ''
+            this.organization = ''
         },
         cancelSignUp() {
+            this.errorMsg = []
+            this.isError = false
             this.formName = 'login'
         },
         register() {
@@ -92,7 +112,6 @@ export default {
                 password: this.passwordSignUp,
                 organization: this.organization
             })
-            this.formName = 'login'
         }
     }
 }

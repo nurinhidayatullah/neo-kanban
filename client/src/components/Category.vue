@@ -75,7 +75,7 @@
                                 <textarea class="form-control" v-model="description" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
                             <div class="btn-add-edit">
-                                <button type="submit" class="btn btn-primary mr-4">Add Task</button>
+                                <button type="submit" class="btn btn-primary mr-4" hide.bs >Add Task</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </form>
@@ -91,7 +91,7 @@
 import Task from './Task'
 export default {
     name: "Category",
-    props: ['categoryData', 'tasksDatas', 'userEmail', 'isAdded'],
+    props: ['categoryData', 'tasksDatas', 'userEmail'],
     data() {
         return {
             title: '',

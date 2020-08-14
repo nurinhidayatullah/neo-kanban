@@ -4,6 +4,10 @@
             v-if="pageName == 'loginPage'"
             @loginEvent="login"
             @signUpEvent="register"
+            @gAuth="googleLogin"
+            :errorMsg="error"
+            :isError="isError"
+            :formName="formName"
         ></LoginPage>
         <HomePage 
             v-else-if="pageName == 'homePage'"
@@ -13,7 +17,6 @@
             :userEmail="emailUser"
             @deleteEvent="deleteTask"
             @addEvent="addTask"
-            :isAdded="isAdded"
             @editEvent="editTask"
         ></HomePage>
     </div>
@@ -31,7 +34,9 @@ export default {
             tasks: [],
             categories: [],
             emailUser: '',
-            isAdded: ''
+            error: [],
+            isError: false,
+            formName: 'login'
         }
     },
     components: {
@@ -41,6 +46,8 @@ export default {
     methods: {
         checkAuth() {
             if(localStorage.token){
+                this.errorMsg = []
+                this.isError = false
                 this.pageName = 'homePage'
                 this.fetchCategories()
                 this.fetchTask()
@@ -61,8 +68,32 @@ export default {
             })
             .then(({data}) => {
                 this.checkAuth()
+                this.formName = 'login'
             })
             .catch( err => {
+                this.error = []
+                this.isError = false
+                if(payload.email == '') this.error.push('Email Required')
+                if(payload.password == '') this.error.push('Password Required')
+                if(payload.password.length < 6) this.error.push('Password length must be more than 6')
+                this.isError = true
+                this.formName = 'signUp'
+            })
+        },
+        googleLogin(auth) {
+            axios({
+                url: "/googleLogin",
+                method: "post",
+                data: {
+                    id_token: auth
+                }
+            })
+            .then(({data}) => {
+                localStorage.token = data.token
+                localStorage.email = data.email
+                this.checkAuth()
+            })
+            .catch(err => {
                 console.log(err)
             })
         },
@@ -81,7 +112,10 @@ export default {
                 this.checkAuth()
             })
             .catch(err => {
-                console.log(err)
+                this.error = []
+                this.isError = false
+                this.error.push('Invalid Email or Password')
+                this.isError = true
             })
         },
         
@@ -140,7 +174,7 @@ export default {
                 })
         },
         addTask(obj) {
-            console.log(obj.category)
+            console.log(obj)
             axios({
                 url: '/tasks',
                 method: 'post',
@@ -156,7 +190,6 @@ export default {
                 }
             })
             .then(data => {
-                this.isAdded = 'modal'
                 this.checkAuth()
             })
             .catch(err => {

@@ -35,16 +35,18 @@ class TaskControl {
         .then(datas => {
             let arr = []
             datas.forEach(task => {
-                if(task.User.organization === organization) arr.push({
+                if(task.User.organization == organization) arr.push({
                     id: task.id,
                     UserId: task.UserId,
                     title: task.title,
                     description: task.description,
                     category: task.category,
                     priority: task.priority,
-                    due_date: task.due_date
+                    due_date: task.due_date,
+                    User: task.User.dataValues
                 })
             });
+            console.log(arr)
             res.status(200).json({tasks: arr})
         })
         .catch(err => {
@@ -57,15 +59,8 @@ class TaskControl {
     static update (req, res, next) {
         let { id } = req.params
         let { title, description, category, priority, due_date } = req.body
-        Task.update({ 
-            title, 
-            description, 
-            category, 
-            priority, 
-            due_date 
-        }, {where: {
-            id,
-        }})
+        let obj = { title, description, category, priority, due_date }
+        Task.update(obj, {where: {id}})
         .then(data => {
             res.status(200).json({msg: 'Success Edit Data'})
         })

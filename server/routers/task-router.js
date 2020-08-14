@@ -5,10 +5,10 @@ const authorization = require('../middlewares/authorization')
 
 router.use(authentication)
 
+router.get('/categories', TaskControl.getCategory)
 router.post('/', TaskControl.create)
 router.get('/', TaskControl.show)
-router.put('/:id', authorization, TaskControl.update)
 router.delete('/:id', authorization, TaskControl.delete)
-router.get('/categories', TaskControl.getCategory)
+router.put('/:id', authorization, TaskControl.update)
 
 module.exports = router

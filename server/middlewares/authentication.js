@@ -11,6 +11,7 @@ const authentication = async (req, res, next) => {
             }
         })
             req.userData = decoded
+            console.log(req.userData)
             next()
     } catch (err) {
         next(err)

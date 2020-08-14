@@ -40,10 +40,8 @@
             :userEmail="userEmail"
             @deleteEvent="deleteTask"
             @addEvent="addTask"
-            :isAdded="isAdded"
             @editEvent="editTask"
         ></Category>
-        {{isAdded}}
         </div>      
     </div>
 </template>
@@ -52,7 +50,7 @@
 import Category from '../components/Category'
 export default {
     name: "HomePage",
-    props: ['organizationTasks', 'organizationCategories', 'userEmail', 'isAdded'],
+    props: ['organizationTasks', 'organizationCategories', 'userEmail'],
     components: {
         Category
     },

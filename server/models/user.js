@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       beforeCreate: (user, opt) => {
-        if(user.organization == '') {
+        if(user.organization == '' || user.organization == null) {
           user.organization = 'Hacktiv8'
         }
         user.password = hashPwd(user.password)
