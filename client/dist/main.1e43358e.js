@@ -10740,23 +10740,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 var _default = {
   name: "LoginPage",
-  props: ['errorMsg', 'isError', 'formName'],
+  props: ['formName', 'isError', 'errorMsg'],
   data: function data() {
     return {
-      clientId: '559460521278-s7u57ea17eq0i27ajnuc7vpfq5rls9v1.apps.googleusercontent.com',
+      clientId: '38201674917-c8tvgpldok85n5sc6k11harn0db2715m.apps.googleusercontent.com',
       email: '',
       password: '',
       emailSignUp: '',
       passwordSignUp: '',
       organization: ''
     };
-  },
-  computed: {
-    errStr: function errStr() {
-      return this.errorMsg.join('');
-    }
   },
   methods: {
     OnGoogleAuthSuccess: function OnGoogleAuthSuccess(idToken) {
@@ -10772,16 +10769,15 @@ var _default = {
       });
     },
     toSignUpPage: function toSignUpPage() {
-      this.isError = false, this.errorMsg = '';
-      this.formName = 'signUp';
       this.passwordSignUp = '';
       this.emailSignUp = '';
       this.organization = '';
+      this.$emit('changeFormName', 'signUp');
     },
     cancelSignUp: function cancelSignUp() {
-      this.errorMsg = [];
-      this.isError = false;
-      this.formName = 'login';
+      this.email = '';
+      this.password = '';
+      this.$emit('cancelSignUp', 'login');
     },
     register: function register() {
       this.$emit('signUpEvent', {
@@ -10789,7 +10785,6 @@ var _default = {
         password: this.passwordSignUp,
         organization: this.organization
       });
-      this.formName = 'login';
     }
   }
 };
@@ -10831,6 +10826,26 @@ exports.default = _default;
                     }
                   },
                   [
+                    _c("div", [
+                      _vm.isError.email == true
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "alert-danger",
+                              attrs: { role: "alert" }
+                            },
+                            [
+                              _c("b", [
+                                _c("i", [
+                                  _vm._v(_vm._s(_vm.errorMsg.email)),
+                                  _vm._m(1)
+                                ])
+                              ])
+                            ]
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
                     _c("div", { staticClass: "w-75" }, [
                       _c("div", { staticClass: "form-group" }, [
                         _c("label", { attrs: { for: "exampleInputEmail1" } }, [
@@ -10861,20 +10876,7 @@ exports.default = _default;
                               _vm.email = $event.target.value
                             }
                           }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "small",
-                          {
-                            staticClass: "form-text text-muted",
-                            attrs: { id: "emailHelp" }
-                          },
-                          [
-                            _vm._v(
-                              "We'll never share your email with anyone else."
-                            )
-                          ]
-                        )
+                        })
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
@@ -10917,12 +10919,12 @@ exports.default = _default;
                     _vm.isError == true
                       ? _c("small", [
                           _c("b", [
-                            _c("i", [_vm._v(_vm._s(_vm.errStr)), _vm._m(1)])
+                            _c("i", [_vm._v(_vm._s(_vm.errStr)), _vm._m(2)])
                           ])
                         ])
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm._m(2)
+                    _vm._m(3)
                   ]
                 ),
                 _vm._v(" "),
@@ -10978,11 +10980,12 @@ exports.default = _default;
                   },
                   [_vm._v("Start for Free")]
                 ),
+                _c("br"),
                 _vm._v(" "),
                 _c(
                   "form",
                   {
-                    staticClass: "mt-2",
+                    staticClass: "mt-2 form-signUp-login",
                     on: {
                       submit: function($event) {
                         $event.preventDefault()
@@ -10995,6 +10998,46 @@ exports.default = _default;
                       _c("div", { staticClass: "form-group" }, [
                         _c("label", { attrs: { for: "exampleInputEmail2" } }, [
                           _vm._v("Email address")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm.isError.email == true
+                            ? _c(
+                                "small",
+                                {
+                                  staticClass: "alert-danger",
+                                  attrs: { role: "alert" }
+                                },
+                                [
+                                  _c("b", [
+                                    _c("i", [
+                                      _vm._v(_vm._s(_vm.errorMsg.email)),
+                                      _vm._m(4)
+                                    ])
+                                  ])
+                                ]
+                              )
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm.isError.taken == true
+                            ? _c(
+                                "small",
+                                {
+                                  staticClass: "alert-danger",
+                                  attrs: { role: "alert" }
+                                },
+                                [
+                                  _c("b", [
+                                    _c("i", [
+                                      _vm._v(_vm._s(_vm.errorMsg.taken)),
+                                      _vm._m(5)
+                                    ])
+                                  ])
+                                ]
+                              )
+                            : _vm._e()
                         ]),
                         _vm._v(" "),
                         _c("input", {
@@ -11043,6 +11086,47 @@ exports.default = _default;
                           { attrs: { for: "exampleInputPassword2" } },
                           [_vm._v("Password")]
                         ),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm.isError.password == true
+                            ? _c(
+                                "small",
+                                {
+                                  staticClass: "alert-danger",
+                                  attrs: { role: "alert" }
+                                },
+                                [
+                                  _c("b", [
+                                    _c("i", [
+                                      _vm._v(_vm._s(_vm.errorMsg.password)),
+                                      _vm._m(6)
+                                    ])
+                                  ])
+                                ]
+                              )
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm.isError.pwdLength == true
+                            ? _c(
+                                "small",
+                                {
+                                  staticClass: "alert-danger",
+                                  attrs: { role: "alert" }
+                                },
+                                [
+                                  _c("b", [
+                                    _c("i", [
+                                      _vm._v(_vm._s(_vm.errorMsg.pwdLength)),
+                                      _vm._m(7)
+                                    ])
+                                  ])
+                                ]
+                              )
+                            : _vm._e()
+                        ]),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -11127,15 +11211,6 @@ exports.default = _default;
                       [_vm._v("Cancel")]
                     ),
                     _c("br"),
-                    _vm._v(" "),
-                    _vm.isError == true
-                      ? _c("small", [
-                          _c("b", [
-                            _c("i", [_vm._v(_vm._s(_vm.errStr)), _vm._m(3)])
-                          ])
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
                     _c("br")
                   ]
                 )
@@ -11154,7 +11229,7 @@ exports.default = _default;
         attrs: { src: "/leaf.7fe0a637.png" }
       }),
       _vm._v(" "),
-      _vm._m(4),
+      _vm._m(8),
       _vm._v(" "),
       _c("img", {
         staticClass: "img-login-main img-fluid",
@@ -11172,6 +11247,12 @@ var staticRenderFns = [
       _vm._v("Login to "),
       _c("b", [_vm._v("KANBAN")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("i", [_c("b")])
   },
   function() {
     var _vm = this
@@ -11203,6 +11284,24 @@ var staticRenderFns = [
         [_vm._v("or")]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("i", [_c("b")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("i", [_c("b")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("i", [_c("b")])
   },
   function() {
     var _vm = this
@@ -11313,6 +11412,14 @@ exports.default = void 0;
 var _default = {
   name: "EditModal",
   props: ['taskProperty'],
+  data: function data() {
+    return {
+      title: this.taskProperty.title,
+      priority: this.taskProperty.priority,
+      description: this.taskProperty.description,
+      due_date: this.taskProperty.due_date
+    };
+  },
   computed: {
     dateConvert: function dateConvert() {
       return new Date(this.taskProperty.due_date).toJSON().slice(0, 10);
@@ -11320,16 +11427,22 @@ var _default = {
   },
   methods: {
     editTask: function editTask() {
-      console.log(this.taskProperty.priority);
       this.$emit('editEvent', {
         id: this.taskProperty.id,
-        title: this.taskProperty.title,
-        description: this.taskProperty.description,
-        category: this.taskProperty.category,
-        priority: this.taskProperty.priority,
-        due_date: this.taskProperty.due_date
+        title: this.title,
+        description: this.description,
+        category: this.category,
+        priority: this.priority,
+        due_date: this.due_date
       });
-    }
+    },
+    closeButton: function closeButton() {
+      this.title = this.taskProperty.title;
+      this.priority = this.taskProperty.priority;
+      this.description = this.taskProperty.description;
+      this.due_date = this.taskProperty.due_date;
+    },
+    input: function input() {}
   }
 };
 exports.default = _default;
@@ -11391,8 +11504,8 @@ exports.default = _default;
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.taskProperty.title,
-                          expression: "taskProperty.title"
+                          value: _vm.title,
+                          expression: "title"
                         }
                       ],
                       staticClass: "form-control",
@@ -11401,17 +11514,13 @@ exports.default = _default;
                         id: "exampleInputEmail1",
                         "aria-describedby": "emailHelp"
                       },
-                      domProps: { value: _vm.taskProperty.title },
+                      domProps: { value: _vm.title },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(
-                            _vm.taskProperty,
-                            "title",
-                            $event.target.value
-                          )
+                          _vm.title = $event.target.value
                         }
                       }
                     })
@@ -11430,8 +11539,8 @@ exports.default = _default;
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.taskProperty.priority,
-                              expression: "taskProperty.priority"
+                              value: _vm.priority,
+                              expression: "priority"
                             }
                           ],
                           staticClass: "form-control",
@@ -11446,13 +11555,9 @@ exports.default = _default;
                                   var val = "_value" in o ? o._value : o.value
                                   return val
                                 })
-                              _vm.$set(
-                                _vm.taskProperty,
-                                "priority",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
+                              _vm.priority = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
                             }
                           }
                         },
@@ -11465,10 +11570,7 @@ exports.default = _default;
                             "option",
                             {
                               attrs: { value: "critical" },
-                              domProps: {
-                                selected:
-                                  _vm.taskProperty.priority == "critical"
-                              }
+                              domProps: { selected: _vm.priority == "critical" }
                             },
                             [_vm._v("Critical")]
                           ),
@@ -11477,10 +11579,7 @@ exports.default = _default;
                             "option",
                             {
                               attrs: { value: "alarming" },
-                              domProps: {
-                                selected:
-                                  _vm.taskProperty.priority == "alarming"
-                              }
+                              domProps: { selected: _vm.priority == "alarming" }
                             },
                             [_vm._v("Alarming")]
                           ),
@@ -11489,9 +11588,7 @@ exports.default = _default;
                             "option",
                             {
                               attrs: { value: "low" },
-                              domProps: {
-                                selected: _vm.taskProperty.priority == "low"
-                              }
+                              domProps: { selected: _vm.priority == "low" }
                             },
                             [_vm._v("Low")]
                           ),
@@ -11500,9 +11597,7 @@ exports.default = _default;
                             "option",
                             {
                               attrs: { value: "lowest" },
-                              domProps: {
-                                selected: _vm.taskProperty.priority == "lowest"
-                              }
+                              domProps: { selected: _vm.priority == "lowest" }
                             },
                             [_vm._v("Lowest")]
                           )
@@ -11516,23 +11611,12 @@ exports.default = _default;
                       ]),
                       _vm._v(" "),
                       _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.dateConvert,
-                            expression: "dateConvert"
-                          }
-                        ],
                         staticClass: "form-control",
                         attrs: { type: "date", id: "inputDue_Date" },
                         domProps: { value: _vm.dateConvert },
                         on: {
                           input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.dateConvert = $event.target.value
+                            _vm.due_date = $event.target.value
                           }
                         }
                       })
@@ -11549,29 +11633,49 @@ exports.default = _default;
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.taskProperty.description,
-                          expression: "taskProperty.description"
+                          value: _vm.description,
+                          expression: "description"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { id: "inputDescription", rows: "3" },
-                      domProps: { value: _vm.taskProperty.description },
+                      domProps: { value: _vm.description },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(
-                            _vm.taskProperty,
-                            "description",
-                            $event.target.value
-                          )
+                          _vm.description = $event.target.value
                         }
                       }
                     })
                   ]),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _c("div", { staticClass: "btn-add-edit" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary mr-4",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Edit Task")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.closeButton($event)
+                          }
+                        }
+                      },
+                      [_vm._v("Close")]
+                    )
+                  ])
                 ]
               )
             ])
@@ -11590,7 +11694,7 @@ var staticRenderFns = [
       _c(
         "h3",
         { staticClass: "modal-title", attrs: { id: "staticBackdropLabel" } },
-        [_vm._v("Add Task")]
+        [_vm._v("Edit Task")]
       ),
       _vm._v(" "),
       _c(
@@ -11604,27 +11708,6 @@ var staticRenderFns = [
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "btn-add-edit" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary mr-4", attrs: { type: "submit" } },
-        [_vm._v("Add Task")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
       )
     ])
   }
@@ -18814,8 +18897,6 @@ var _default = {
       this.$emit('dragEvent', obj);
     },
     onMove: function onMove(evt) {
-      console.log(evt.draggedContext.element.id);
-      console.log(evt.relatedContext.component.$attrs.category.name);
       this.currentId = evt.draggedContext.element.id;
       this.currentCategory = evt.relatedContext.component.$attrs.category.name;
     },
@@ -18823,8 +18904,8 @@ var _default = {
       this.$emit('deleteEvent', id);
     },
     addTask: function addTask() {
-      console.log(this.categoryData.name);
       this.$emit('addEvent', {
+        categoryId: this.categoryData.id,
         title: this.title,
         category: this.categoryData.name,
         priority: this.priority,
@@ -18960,7 +19041,6 @@ exports.default = _default;
         staticClass: "modal fade add-task-modal",
         attrs: {
           id: "staticBackdrop-" + _vm.categoryData.id,
-          "data-backdrop": "static",
           "data-keyboard": "false",
           tabindex: "-1",
           "aria-labelledby": "staticBackdropLabel",
@@ -19140,7 +19220,28 @@ exports.default = _default;
                       })
                     ]),
                     _vm._v(" "),
-                    _vm._m(3)
+                    _c("div", { staticClass: "btn-add-edit" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary mr-4",
+                          attrs: {
+                            type: "submit",
+                            id: "dismiss-" + _vm.categoryData.id
+                          }
+                        },
+                        [_vm._v("Add Task")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { type: "button", "data-dismiss": "modal" }
+                        },
+                        [_vm._v("Close")]
+                      )
+                    ])
                   ]
                 )
               ])
@@ -19195,30 +19296,6 @@ var staticRenderFns = [
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "btn-add-edit" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary mr-4",
-          attrs: { type: "submit", "hide.bs": "" }
-        },
-        [_vm._v("Add Task")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
       )
     ])
   }
@@ -19581,6 +19658,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 var _default = {
   name: "App",
   data: function data() {
@@ -19589,9 +19668,19 @@ var _default = {
       tasks: [],
       categories: [],
       emailUser: '',
-      error: [],
-      isError: false,
-      formName: 'login'
+      formName: 'login',
+      error: {
+        email: '',
+        password: '',
+        pwdLength: '',
+        taken: ''
+      },
+      isError: {
+        email: false,
+        password: false,
+        pwdLength: false,
+        taken: false
+      }
     };
   },
   components: {
@@ -19601,8 +19690,6 @@ var _default = {
   methods: {
     checkAuth: function checkAuth() {
       if (localStorage.token) {
-        this.errorMsg = [];
-        this.isError = false;
         this.pageName = 'homePage';
         this.fetchCategories();
         this.fetchTask();
@@ -19627,13 +19714,67 @@ var _default = {
 
         _this.checkAuth();
       }).catch(function (err) {
-        _this.error = [];
-        _this.isError = false;
-        if (payload.email == '') _this.error.push('Email Required');
-        if (payload.password == '') _this.error.push('Password Required');
-        if (payload.password.length < 6) _this.error.push('Password length must be more than 6');
-        _this.isError = true;
+        _this.error = {
+          email: '',
+          password: '',
+          pwdLength: '',
+          taken: ''
+        };
+        _this.isError = {
+          email: false,
+          password: false,
+          pwdLength: false,
+          taken: false
+        };
+
+        if (payload.email == '') {
+          _this.error.email = 'Email Required';
+          _this.isError.email = true;
+        }
+
+        if (payload.password == '') {
+          _this.error.password = 'Password Required';
+          _this.isError.password = true;
+        }
+
+        if (payload.password.length < 6) {
+          _this.error.pwdLength = 'Password length must be more than 6';
+          _this.isError.pwdLength = true;
+        } else {
+          _this.error.taken = 'This Email Has been registered';
+          _this.isError.taken = true;
+        }
       });
+    },
+    toSignUp: function toSignUp(name) {
+      this.error = {
+        email: '',
+        password: '',
+        pwdLength: '',
+        taken: ''
+      };
+      this.isError = {
+        email: false,
+        password: false,
+        pwdLength: false,
+        taken: false
+      };
+      this.formName = name;
+    },
+    cancelSignUp: function cancelSignUp(name) {
+      this.error = {
+        email: '',
+        password: '',
+        pwdLength: '',
+        taken: ''
+      };
+      this.isError = {
+        email: false,
+        password: false,
+        pwdLength: false,
+        taken: false
+      };
+      this.formName = name;
     },
     googleLogin: function googleLogin(auth) {
       var _this2 = this;
@@ -19671,12 +19812,11 @@ var _default = {
 
         _this3.checkAuth();
       }).catch(function (err) {
-        _this3.error = [];
-        _this3.isError = false;
-
-        _this3.error.push('Invalid Email or Password');
-
-        _this3.isError = true;
+        _this3.error.email = '';
+        _this3.isError.email = false;
+        _this3.error.email = 'Invalid Email Or Password';
+        _this3.isError.email = true;
+        console.log(err);
       });
     },
     getEmail: function getEmail() {
@@ -19754,7 +19894,6 @@ var _default = {
     addTask: function addTask(obj) {
       var _this8 = this;
 
-      console.log(obj);
       (0, _axios.default)({
         url: '/tasks',
         method: 'post',
@@ -19769,6 +19908,8 @@ var _default = {
           due_date: obj.due_date
         }
       }).then(function (data) {
+        $("#staticBackdrop-".concat(obj.categoryId)).modal('hide');
+
         _this8.checkAuth();
       }).catch(function (err) {
         console.log(err);
@@ -19791,6 +19932,8 @@ var _default = {
           category: obj.category
         }
       }).then(function (res) {
+        $("#staticBackdrop-add-".concat(obj.id)).modal('hide');
+
         _this9.checkAuth();
       }).catch(function (err) {
         console.log(err);
@@ -19820,14 +19963,16 @@ exports.default = _default;
       _vm.pageName == "loginPage"
         ? _c("LoginPage", {
             attrs: {
-              errorMsg: _vm.error,
+              formName: _vm.formName,
               isError: _vm.isError,
-              formName: _vm.formName
+              errorMsg: _vm.error
             },
             on: {
               loginEvent: _vm.login,
               signUpEvent: _vm.register,
-              gAuth: _vm.googleLogin
+              gAuth: _vm.googleLogin,
+              changeFormName: _vm.toSignUp,
+              cancelSignUp: _vm.cancelSignUp
             }
           })
         : _vm.pageName == "homePage"
@@ -19981,7 +20126,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36221" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36827" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

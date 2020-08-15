@@ -27,7 +27,7 @@
                             </div>
                             <div class="form-group date-sizing">
                                 <label for="inputDue_Date">Due Date</label>
-                                <input type="date" v-model="due_date" :value="dateConvert" class="form-control" id="inputDue_Date">
+                                <input type="date" :value="dateConvert" @input="due_date=$event.target.value" class="form-control" id="inputDue_Date">
                             </div>
                         </div>
                         <div class="form-group">
@@ -66,11 +66,11 @@ export default {
         editTask() {
             this.$emit('editEvent', {
                 id: this.taskProperty.id,
-                title: this.taskProperty.title,
-                description: this.taskProperty.description,
-                category: this.taskProperty.category,
-                priority: this.taskProperty.priority,
-                due_date: this.taskProperty.due_date
+                title: this.title,
+                description: this.description,
+                category: this.category,
+                priority: this.priority,
+                due_date: this.due_date
             })
         },
 
@@ -78,7 +78,11 @@ export default {
             this.title = this.taskProperty.title
             this.priority = this.taskProperty.priority
             this.description = this.taskProperty.description
-            this.due_date = taskProperty.due_date
+            this.due_date = this.taskProperty.due_date
+        },
+
+        input() {
+
         }
     }
 }

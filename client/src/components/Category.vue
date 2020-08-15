@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade add-task-modal" :id="`staticBackdrop-${categoryData.id}`" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade add-task-modal" :id="`staticBackdrop-${categoryData.id}`" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content add-form-styling">
                     <div class="modal-header">
@@ -77,7 +77,7 @@
                                 <textarea class="form-control" v-model="description" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
                             <div class="btn-add-edit">
-                                <button type="submit" class="btn btn-primary mr-4" hide.bs >Add Task</button>
+                                <button type="submit" class="btn btn-primary mr-4" :id="`dismiss-${categoryData.id}`">Add Task</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </form>
@@ -128,8 +128,6 @@ export default {
             this.$emit('dragEvent', obj)
         },
         onMove(evt) {
-            console.log(evt.draggedContext.element.id)
-            console.log(evt.relatedContext.component.$attrs.category.name)
             this.currentId = evt.draggedContext.element.id
             this.currentCategory = evt.relatedContext.component.$attrs.category.name
         },
@@ -137,8 +135,8 @@ export default {
             this.$emit('deleteEvent', id)
         },
         addTask() {
-            console.log(this.categoryData.name)
              this.$emit('addEvent', {
+                categoryId: this.categoryData.id,
                 title: this.title,
                 category: this.categoryData.name,
                 priority: this.priority,

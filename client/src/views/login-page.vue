@@ -7,11 +7,11 @@
                     <div v-if="formName == 'login'">
                         <p class="login-title">Login to <b>KANBAN</b></p>
                         <form class="mt-2" @submit.prevent="login">
+                            <div><small v-if="isError.email == true" class="alert-danger" role="alert"><b><i>{{errorMsg.email}}<i><b></small></div>
                             <div class="w-75">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Email address</label>
                                   <input type="email" v-model="email" class="form-control" aria-describedby="emailHelp" id="exampleInputEmail1">
-                                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                 </div>
                                 <div class="form-group">
                                   <label for="exampleInputPassword1">Password</label>
@@ -28,16 +28,20 @@
                             <small>Don't have an account? <a href="" @click.prevent="toSignUpPage">Sign Up Now!</a></small>
                     </div>
                     <div v-else-if="formName == 'signUp'">
-                        <p style="font-size: 32px; text-align: justify; border-bottom: 1px black solid; display: inline;">Start for Free</p>
-                        <form class="mt-2" @submit.prevent="register">
+                        <p style="font-size: 32px; text-align: justify; border-bottom: 1px black solid; display: inline;">Start for Free</p><br>
+                        <form class="mt-2 form-signUp-login" @submit.prevent="register">
                             <div class="w-75">
                                 <div class="form-group">
                                   <label for="exampleInputEmail2">Email address</label>
+                                  <div><small v-if="isError.email == true" class="alert-danger" role="alert"><b><i>{{errorMsg.email}}<i><b></small></div>
+                                  <div><small v-if="isError.taken == true" class="alert-danger" role="alert"><b><i>{{errorMsg.taken}}<i><b></small></div>
                                   <input type="email" v-model="emailSignUp" class="form-control" aria-describedby="emailHelp" id="exampleInputEmail2">
                                   <small id="emailHelp1" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                 </div>
                                 <div class="form-group">
-                                  <label for="exampleInputPassword2">Password</label>
+                                  <label for="exampleInputPassword2">Password</label><br>
+                                  <div><small v-if="isError.password == true" class="alert-danger" role="alert"><b><i>{{errorMsg.password}}<i><b></small></div>
+                                  <div><small v-if="isError.pwdLength == true" class="alert-danger" role="alert"><b><i>{{errorMsg.pwdLength}}<i><b></small></div>
                                   <input type="password" v-model="passwordSignUp" class="form-control" id="exampleInputPassword2">
                                 </div>
                                 <div class="form-group">
@@ -46,9 +50,7 @@
                                   </div>
                             </div>
                                 <button type="submit" class="btn btn-secondary">Sign Up</button>
-                                <button class="btn btn-secondary" @click.prevent="cancelSignUp">Cancel</button><br>
-                                <small v-if="isError == true"><b><i>{{ errStr }}<i><b></small>
-                                <br>
+                                <button class="btn btn-secondary" @click.prevent="cancelSignUp">Cancel</button><br><br>
                         </form>
                     </div>
                 </div>
@@ -65,19 +67,15 @@
 import axios from '../config/axios'
 export default {
     name: "LoginPage",
-    props: ['errorMsg', 'isError', 'formName'],
+    props: ['formName', 'isError', 'errorMsg'],
     data() {
         return {
-            clientId: '559460521278-s7u57ea17eq0i27ajnuc7vpfq5rls9v1.apps.googleusercontent.com',
+            clientId: '38201674917-c8tvgpldok85n5sc6k11harn0db2715m.apps.googleusercontent.com',
             email: '',
             password: '',
             emailSignUp: '',
             passwordSignUp: '',
             organization: '',
-        }
-    }, computed :{
-        errStr() {
-            return this.errorMsg.join('')
         }
     },
     methods: {
@@ -94,17 +92,15 @@ export default {
             })
         },
         toSignUpPage() {
-            this.isError = false,
-            this.errorMsg = ''
-            this.formName = 'signUp'
             this.passwordSignUp = ''
             this.emailSignUp = ''
             this.organization = ''
+            this.$emit('changeFormName', 'signUp')
         },
         cancelSignUp() {
-            this.errorMsg = []
-            this.isError = false
-            this.formName = 'login'
+            this.email = ''
+            this.password = ''
+            this.$emit('cancelSignUp', 'login')
         },
         register() {
             this.$emit('signUpEvent', {

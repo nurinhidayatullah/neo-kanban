@@ -5,9 +5,11 @@
             @loginEvent="login"
             @signUpEvent="register"
             @gAuth="googleLogin"
-            :errorMsg="error"
-            :isError="isError"
             :formName="formName"
+            @changeFormName="toSignUp"
+            @cancelSignUp="cancelSignUp"
+            :isError="isError"
+            :errorMsg="error"
         ></LoginPage>
         <HomePage 
             v-else-if="pageName == 'homePage'"
@@ -35,9 +37,19 @@ export default {
             tasks: [],
             categories: [],
             emailUser: '',
-            error: [],
-            isError: false,
-            formName: 'login'
+            formName: 'login',
+            error: {
+                email: '',
+                password: '',
+                pwdLength: '',
+                taken: '',
+            },
+            isError: {
+                email: false,
+                password: false,
+                pwdLength: false,
+                taken: false,
+            }
         }
     },
     components: {
@@ -47,8 +59,6 @@ export default {
     methods: {
         checkAuth() {
             if(localStorage.token){
-                this.errorMsg = []
-                this.isError = false
                 this.pageName = 'homePage'
                 this.fetchCategories()
                 this.fetchTask()
@@ -69,17 +79,67 @@ export default {
             })
             .then(({data}) => {
                 this.checkAuth()
-                this.formName = 'login'
             })
             .catch( err => {
-                this.error = []
-                this.isError = false
-                if(payload.email == '') this.error.push('Email Required')
-                if(payload.password == '') this.error.push('Password Required')
-                if(payload.password.length < 6) this.error.push('Password length must be more than 6')
-                this.isError = true
-                this.formName = 'signUp'
+                this.error = {
+                    email: '',
+                    password: '',
+                    pwdLength: '',
+                    taken: '',                 
+                }
+                this.isError = {
+                    email: false,
+                    password: false,
+                    pwdLength: false,
+                    taken: false,
+                }
+                if(payload.email == '') {
+                    this.error.email = 'Email Required'
+                    this.isError.email = true
+                }
+                if(payload.password == '') {
+                    this.error.password = 'Password Required'
+                    this.isError.password = true
+                } 
+                if(payload.password.length < 6) {
+                    this.error.pwdLength='Password length must be more than 6'
+                    this.isError.pwdLength = true
+                } 
+                else {
+                    this.error.taken ='This Email Has been registered'
+                    this.isError.taken = true
+                } 
             })
+        },
+        toSignUp(name) {
+            this.error = {
+                email: '',
+                password: '',
+                pwdLength: '',
+                taken: '',                 
+            }
+            this.isError = {
+                email: false,
+                password: false,
+                pwdLength: false,
+                taken: false,
+            }
+            this.formName = name
+        },
+        cancelSignUp(name) {
+            this.error = {
+                email: '',
+                password: '',
+                pwdLength: '',
+                taken: '',                 
+            }
+            this.isError = {
+                email: false,
+                password: false,
+                pwdLength: false,
+                taken: false,
+            }
+            this.formName = name
         },
         googleLogin(auth) {
             axios({
@@ -113,10 +173,11 @@ export default {
                 this.checkAuth()
             })
             .catch(err => {
-                this.error = []
-                this.isError = false
-                this.error.push('Invalid Email or Password')
-                this.isError = true
+                this.error.email = ''
+                this.isError.email = false
+                this.error.email= 'Invalid Email Or Password'
+                this.isError.email = true
+                console.log(err)
             })
         },
         getEmail() {
@@ -191,7 +252,6 @@ export default {
                 })
         },
         addTask(obj) {
-            console.log(obj)
             axios({
                 url: '/tasks',
                 method: 'post',
@@ -207,6 +267,7 @@ export default {
                 }
             })
             .then(data => {
+                $(`#staticBackdrop-${obj.categoryId}`).modal('hide')
                 this.checkAuth()
             })
             .catch(err => {
@@ -229,6 +290,7 @@ export default {
                 }
             })
             .then(res => {
+                $(`#staticBackdrop-add-${obj.id}`).modal('hide')
                 this.checkAuth()
             })
             .catch(err => {
