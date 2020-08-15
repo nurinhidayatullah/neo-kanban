@@ -68,7 +68,7 @@ export default {
     props: ['errorMsg', 'isError', 'formName'],
     data() {
         return {
-            clientId: '559460521278-l7nojve7knmj89b0luao668hu455jsqn.apps.googleusercontent.com',
+            clientId: '559460521278-s7u57ea17eq0i27ajnuc7vpfq5rls9v1.apps.googleusercontent.com',
             email: '',
             password: '',
             emailSignUp: '',

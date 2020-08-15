@@ -10,9 +10,11 @@ const authentication = async (req, res, next) => {
                 email: decoded.email
             }
         })
+        if (!user) throw { msg: 'Authentication Failed', status: 401 }
+        else {
             req.userData = decoded
-            console.log(req.userData)
             next()
+        }
     } catch (err) {
         next(err)
     }
