@@ -115,7 +115,6 @@ class TaskControl {
             })
             .catch(err => {
                 console.log(err)
-                // res.status(500).json({msg : err})
                 next(err)
             }) 
     }
